@@ -11,12 +11,9 @@
   |
  */
 
+
+Route::get('/{any}', 'PageController@home')->where('any', '.*');
+
 Route::get('/', function () {
     return view('welcome');
 });
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-Route::post('/page-speed', 'PageController@index')->name('page-speed');
-Route::get('/page-speed/result', 'PageController@result')->name('page-speed-result');

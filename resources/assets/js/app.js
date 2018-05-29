@@ -17,7 +17,28 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
 Vue.component('page-speed-component', require('./components/PageSpeedComponent.vue'));
+Vue.component('login-component', require('./components/LoginComponent.vue'));
+Vue.component('register-component', require('./components/RegisterComponent.vue'));
+
+import VueRouter from 'vue-router';
+import Login from './components/LoginComponent.vue';
+import RegisterComponent from './components/RegisterComponent.vue';
+import PageSpeedComponent from './components/PageSpeedComponent.vue';
+
+Vue.use(VueRouter);
+
+const routes = [
+    {path: "/login", component: Login},
+    {path: "/register", component: RegisterComponent},
+    {path: "/api/page-speed", component: PageSpeedComponent},
+];
+
+const router = new VueRouter({
+    routes,
+    mode: "history"
+});
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router,
 });

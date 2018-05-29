@@ -27,5 +27,8 @@
     "test": "tests"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "vue-router": "^3.0.1"
+  }
 }
