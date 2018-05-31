@@ -27,8 +27,9 @@
                         <div class="summary-block">
                             <p class="head">Summary</p>
                             <div class="left">
+                                <div class="img-loader" v-bind:style="{toggleStyle : displayLoader}"></div>
                                 <div class="img-block">
-                                    <img src="" />
+                                    <img v-bind:src="imageSrc" />
                                 </div>
                             </div>
                             <div class="right">
@@ -155,7 +156,16 @@
             return {
                 pageUrl: '',
                 id: '',
-                success: false
+                success: false,
+                issues: [],
+                suggetion: [],
+                imageSrc: '',
+                toggleStyle: {
+                    display: 'block',
+                },
+                displayLoader: false,
+                response: [],
+                pageStats: '',
             }
         },
         mounted() {
@@ -164,9 +174,17 @@
         methods: {
             create() {
                 this.mute = true;
+                this.success = true;
+                this.displayLoader = true;
                 window.axios.post('/api/page-speed', {pageUrl: this.pageUrl}).then(({ data }) => {
+                    console.log(data.response.responseCode);
                     if (data.response.responseCode == 200) {
-                        this.success = true;
+                        this.displayLoader = false;
+                        this.response = data.response;
+                        this.pageStats = data.response.responseCode;
+                        this.issues = data.issues;
+                        this.suggetion = data.suggetion;
+                        this.imageSrc = data.image;
                     }
                     this.id = data.id;
                 });
@@ -179,4 +197,9 @@
     @import "css/style.css";
     @import "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css";
     @import "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css";
+
+    /* Loader css start */
+    .img-loader{background: #fff url("img/loader.gif") no-repeat scroll center center;cursor: wait;display: none;height: 100%;opacity: 0.4;position: fixed;width: 100%;z-index: 9999;background-color:#000;left:0;top:0;border: 1px solid #d4d1d1bf;position: relative;height: 320px;width: 100%;vertical-align: top;}
+    /* Loader css start */
+
 </style>

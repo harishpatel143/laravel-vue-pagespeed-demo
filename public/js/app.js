@@ -47661,13 +47661,14 @@ if(false) {
 /* 48 */
 /***/ (function(module, exports, __webpack_require__) {
 
+var escape = __webpack_require__(50);
 exports = module.exports = __webpack_require__(13)(false);
 // imports
 exports.i(__webpack_require__(49), "");
 exports.push([module.i, "@import url(https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css);", ""]);
 
 // module
-exports.push([module.i, "\n", ""]);
+exports.push([module.i, "\n/* Loader css start */\n.img-loader[data-v-612873c8]{background: #fff url(" + escape(__webpack_require__(69)) + ") no-repeat scroll center center;cursor: wait;display: none;height: 100%;opacity: 0.4;position: fixed;width: 100%;z-index: 9999;background-color:#000;left:0;top:0;border: 1px solid #d4d1d1bf;position: relative;height: 320px;width: 100%;vertical-align: top;\n}\n/* Loader css start */\n\n", ""]);
 
 // exports
 
@@ -48157,13 +48158,23 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             pageUrl: '',
             id: '',
-            success: false
+            success: false,
+            issues: [],
+            suggetion: [],
+            imageSrc: '',
+            toggleStyle: {
+                display: 'block'
+            },
+            displayLoader: false,
+            response: []
         };
     },
     mounted: function mounted() {
@@ -48175,11 +48186,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var _this = this;
 
             this.mute = true;
+            this.success = true;
+            this.displayLoader = true;
             window.axios.post('/api/page-speed', { pageUrl: this.pageUrl }).then(function (_ref) {
                 var data = _ref.data;
 
                 if (data.response.responseCode == 200) {
-                    _this.success = true;
+                    _this.displayLoader = false;
+                    _this.response = data.response;
+                    _this.issues = data.issues;
+                    _this.suggetion = data.suggetion;
+                    _this.imageSrc = data.image;
                 }
                 _this.id = data.id;
             });
@@ -48233,11 +48250,40 @@ var render = function() {
         ]),
         _vm._v(" "),
         _vm.success
-          ? _c("div", { staticClass: "result-section" }, [_vm._m(1)])
+          ? _c("div", { staticClass: "result-section" }, [
+              _c("div", { staticClass: "wrapper" }, [
+                _vm._m(1),
+                _vm._v(" "),
+                _c("div", { staticClass: "summary-block" }, [
+                  _c("p", { staticClass: "head" }, [_vm._v("Summary")]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "left" }, [
+                    _c("div", {
+                      staticClass: "img-loader",
+                      style: { toggleStyle: _vm.displayLoader }
+                    }),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "img-block" }, [
+                      _c("img", { attrs: { src: _vm.imageSrc } })
+                    ])
+                  ]),
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(_vm.response) +
+                      "\n                        "
+                  ),
+                  _vm._m(2)
+                ]),
+                _vm._v(" "),
+                _vm._m(3),
+                _vm._v(" "),
+                _vm._m(4)
+              ])
+            ])
           : _vm._e()
       ]),
       _vm._v(" "),
-      _vm._m(2)
+      _vm._m(5)
     ])
   ])
 }
@@ -48268,231 +48314,231 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "wrapper" }, [
-      _c("div", { staticClass: "download-btn" }, [
-        _c("button", [_vm._v("Download")])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "summary-block" }, [
-        _c("p", { staticClass: "head" }, [_vm._v("Summary")]),
+    return _c("div", { staticClass: "download-btn" }, [
+      _c("button", [_vm._v("Download")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "right" }, [
+      _c("div", { staticClass: "right-row" }, [
+        _c("div", { staticClass: "blog" }, [
+          _c("p", { staticClass: "top" }, [_vm._v("Speed")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "middle red" }, [_vm._v("Slow")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "bottom" }, [
+            _c("span", [
+              _vm._v("3.7s\n                                            "),
+              _c("span", { staticClass: "grey" }, [_vm._v(" FCP")])
+            ]),
+            _vm._v(" "),
+            _c("span", [
+              _vm._v("5.3s\n                                            "),
+              _c("span", { staticClass: "grey" }, [_vm._v(" DCL")])
+            ])
+          ])
+        ]),
         _vm._v(" "),
-        _c("div", { staticClass: "left" }, [
-          _c("div", { staticClass: "img-block" }, [
-            _c("img", { attrs: { src: "" } })
+        _c("div", { staticClass: "blog" }, [
+          _c("p", { staticClass: "top" }, [_vm._v("Optimization")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "middle orange" }, [_vm._v("Medium")]),
+          _vm._v(" "),
+          _c("p", [
+            _c("span", { staticClass: "orange" }, [_vm._v("77 ")]),
+            _vm._v(" / 100")
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "right" }, [
-          _c("div", { staticClass: "right-row" }, [
-            _c("div", { staticClass: "blog" }, [
-              _c("p", { staticClass: "top" }, [_vm._v("Speed")]),
-              _vm._v(" "),
-              _c("p", { staticClass: "middle red" }, [_vm._v("Slow")]),
-              _vm._v(" "),
-              _c("p", { staticClass: "bottom" }, [
-                _c("span", [
-                  _vm._v("3.7s\n                                            "),
-                  _c("span", { staticClass: "grey" }, [_vm._v(" FCP")])
-                ]),
-                _vm._v(" "),
-                _c("span", [
-                  _vm._v("5.3s\n                                            "),
-                  _c("span", { staticClass: "grey" }, [_vm._v(" DCL")])
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "blog" }, [
-              _c("p", { staticClass: "top" }, [_vm._v("Optimization")]),
-              _vm._v(" "),
-              _c("p", { staticClass: "middle orange" }, [_vm._v("Medium")]),
-              _vm._v(" "),
-              _c("p", [
-                _c("span", { staticClass: "orange" }, [_vm._v("77 ")]),
-                _vm._v(" / 100")
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "blog" }, [
-              _c("p", { staticClass: "top" }, [_vm._v("Resources")]),
-              _vm._v(" "),
-              _c("p", { staticClass: "middle yellow" }, [_vm._v("33")])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "blog" }, [
-              _c("p", { staticClass: "top" }, [_vm._v("Resources")]),
-              _vm._v(" "),
-              _c("p", { staticClass: "middle green" }, [_vm._v("33")])
-            ])
-          ])
+        _c("div", { staticClass: "blog" }, [
+          _c("p", { staticClass: "top" }, [_vm._v("Resources")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "middle yellow" }, [_vm._v("33")])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "blog" }, [
+          _c("p", { staticClass: "top" }, [_vm._v("Resources")]),
+          _vm._v(" "),
+          _c("p", { staticClass: "middle green" }, [_vm._v("33")])
         ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "optimization-suggestions" }, [
+      _c("p", { staticClass: "head" }, [_vm._v("Optimization Suggestions")]),
+      _vm._v(" "),
+      _c("button", { staticClass: "accordion" }, [
+        _c("span", { staticClass: "grade grade-b" }, [_vm._v("B")]),
+        _vm._v("Combine external JavaScript")
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "optimization-suggestions" }, [
-        _c("p", { staticClass: "head" }, [_vm._v("Optimization Suggestions")]),
-        _vm._v(" "),
-        _c("button", { staticClass: "accordion" }, [
-          _c("span", { staticClass: "grade grade-b" }, [_vm._v("B")]),
-          _vm._v("Combine external JavaScript")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "panel" }, [
-          _c("p", { staticClass: "panel-head" }, [
-            _vm._v(
-              "Your page has 5 blocking script resources. This causes a delay in rendering your page."
-            )
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "description" }, [
-            _vm._v(
-              "None of the above-the-fold content on your page could be rendered without waiting for the following\n                                resources to load. Try to defer or asynchronously load blocking resources, or inline the\n                                critical portions of those resources directly in the HTML."
-            )
-          ]),
-          _vm._v(" "),
-          _c("ul", [
-            _c("li", [
-              _c("a", { attrs: { href: "#" } }, [
-                _vm._v(
-                  "https://tools.pingdom.com/_js/commonjs.bundle.js?v=c67c475724a05664377f1c330b54613395d60162"
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "#" } }, [
-                _vm._v(
-                  "https://tools.pingdom.com/_js/commonjs.bundle.js?v=c67c475724a05664377f1c330b54613395d60162"
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("button", [_vm._v("Example")])
-        ]),
-        _vm._v(" "),
-        _c("button", { staticClass: "accordion" }, [
-          _c("span", { staticClass: "grade grade-b" }, [_vm._v("B")]),
-          _vm._v("Remove query strings from static resources")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "panel" }, [
-          _c("p", { staticClass: "panel-head" }, [
-            _vm._v(
-              "Your page has 5 blocking script resources. This causes a delay in rendering your page."
-            )
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "description" }, [
-            _vm._v(
-              "None of the above-the-fold content on your page could be rendered without waiting for the following\n                                resources to load. Try to defer or asynchronously load blocking resources, or inline the\n                                critical portions of those resources directly in the HTML."
-            )
-          ]),
-          _vm._v(" "),
-          _c("ul", [
-            _c("li", [
-              _c("a", { attrs: { href: "#" } }, [
-                _vm._v(
-                  "https://tools.pingdom.com/_js/commonjs.bundle.js?v=c67c475724a05664377f1c330b54613395d60162"
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "#" } }, [
-                _vm._v(
-                  "https://tools.pingdom.com/_js/commonjs.bundle.js?v=c67c475724a05664377f1c330b54613395d60162"
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("button", [_vm._v("Example")])
-        ]),
-        _vm._v(" "),
-        _c("button", { staticClass: "accordion" }, [
-          _c("span", { staticClass: "grade" }, [_vm._v("A")]),
-          _vm._v("Leverage browser caching")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "panel" }, [
-          _c("p", { staticClass: "panel-head" }, [
-            _vm._v(
-              "Your page has 5 blocking script resources. This causes a delay in rendering your page."
-            )
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "description" }, [
-            _vm._v(
-              "None of the above-the-fold content on your page could be rendered without waiting for the following\n                                resources to load. Try to defer or asynchronously load blocking resources, or inline the\n                                critical portions of those resources directly in the HTML."
-            )
-          ]),
-          _vm._v(" "),
-          _c("ul", [
-            _c("li", [
-              _c("a", { attrs: { href: "#" } }, [
-                _vm._v(
-                  "https://tools.pingdom.com/_js/commonjs.bundle.js?v=c67c475724a05664377f1c330b54613395d60162"
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "#" } }, [
-                _vm._v(
-                  "https://tools.pingdom.com/_js/commonjs.bundle.js?v=c67c475724a05664377f1c330b54613395d60162"
-                )
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("button", [_vm._v("Example")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "optimization-present" }, [
-        _c("p", { staticClass: "head" }, [
-          _vm._v("Optimizations Already Present")
-        ]),
-        _vm._v(" "),
-        _c("button", { staticClass: "accordion" }, [
+      _c("div", { staticClass: "panel" }, [
+        _c("p", { staticClass: "panel-head" }, [
           _vm._v(
-            "Download optimized image, JavaScript, and CSS resources for this page."
+            "Your page has 5 blocking script resources. This causes a delay in rendering your page."
           )
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "panel" }, [
-          _c("p", { staticClass: "panel-head" }, [
-            _vm._v(
-              "Your page has 5 blocking script resources. This causes a delay in rendering your page."
-            )
-          ]),
-          _vm._v(" "),
-          _c("p", { staticClass: "description" }, [
-            _vm._v(
-              "None of the above-the-fold content on your page could be rendered without waiting for the following\n                                resources to load. Try to defer or asynchronously load blocking resources, or inline the\n                                critical portions of those resources directly in the HTML."
-            )
-          ]),
-          _vm._v(" "),
-          _c("ul", [
-            _c("li", [
-              _c("a", { attrs: { href: "#" } }, [
-                _vm._v(
-                  "https://tools.pingdom.com/_js/commonjs.bundle.js?v=c67c475724a05664377f1c330b54613395d60162"
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", [
-              _c("a", { attrs: { href: "#" } }, [
-                _vm._v(
-                  "https://tools.pingdom.com/_js/commonjs.bundle.js?v=c67c475724a05664377f1c330b54613395d60162"
-                )
-              ])
+        _c("p", { staticClass: "description" }, [
+          _vm._v(
+            "None of the above-the-fold content on your page could be rendered without waiting for the following\n                                resources to load. Try to defer or asynchronously load blocking resources, or inline the\n                                critical portions of those resources directly in the HTML."
+          )
+        ]),
+        _vm._v(" "),
+        _c("ul", [
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _vm._v(
+                "https://tools.pingdom.com/_js/commonjs.bundle.js?v=c67c475724a05664377f1c330b54613395d60162"
+              )
             ])
           ]),
           _vm._v(" "),
-          _c("button", [_vm._v("Example")])
-        ])
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _vm._v(
+                "https://tools.pingdom.com/_js/commonjs.bundle.js?v=c67c475724a05664377f1c330b54613395d60162"
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("button", [_vm._v("Example")])
+      ]),
+      _vm._v(" "),
+      _c("button", { staticClass: "accordion" }, [
+        _c("span", { staticClass: "grade grade-b" }, [_vm._v("B")]),
+        _vm._v("Remove query strings from static resources")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel" }, [
+        _c("p", { staticClass: "panel-head" }, [
+          _vm._v(
+            "Your page has 5 blocking script resources. This causes a delay in rendering your page."
+          )
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "description" }, [
+          _vm._v(
+            "None of the above-the-fold content on your page could be rendered without waiting for the following\n                                resources to load. Try to defer or asynchronously load blocking resources, or inline the\n                                critical portions of those resources directly in the HTML."
+          )
+        ]),
+        _vm._v(" "),
+        _c("ul", [
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _vm._v(
+                "https://tools.pingdom.com/_js/commonjs.bundle.js?v=c67c475724a05664377f1c330b54613395d60162"
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _vm._v(
+                "https://tools.pingdom.com/_js/commonjs.bundle.js?v=c67c475724a05664377f1c330b54613395d60162"
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("button", [_vm._v("Example")])
+      ]),
+      _vm._v(" "),
+      _c("button", { staticClass: "accordion" }, [
+        _c("span", { staticClass: "grade" }, [_vm._v("A")]),
+        _vm._v("Leverage browser caching")
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel" }, [
+        _c("p", { staticClass: "panel-head" }, [
+          _vm._v(
+            "Your page has 5 blocking script resources. This causes a delay in rendering your page."
+          )
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "description" }, [
+          _vm._v(
+            "None of the above-the-fold content on your page could be rendered without waiting for the following\n                                resources to load. Try to defer or asynchronously load blocking resources, or inline the\n                                critical portions of those resources directly in the HTML."
+          )
+        ]),
+        _vm._v(" "),
+        _c("ul", [
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _vm._v(
+                "https://tools.pingdom.com/_js/commonjs.bundle.js?v=c67c475724a05664377f1c330b54613395d60162"
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _vm._v(
+                "https://tools.pingdom.com/_js/commonjs.bundle.js?v=c67c475724a05664377f1c330b54613395d60162"
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("button", [_vm._v("Example")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "optimization-present" }, [
+      _c("p", { staticClass: "head" }, [
+        _vm._v("Optimizations Already Present")
+      ]),
+      _vm._v(" "),
+      _c("button", { staticClass: "accordion" }, [
+        _vm._v(
+          "Download optimized image, JavaScript, and CSS resources for this page."
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "panel" }, [
+        _c("p", { staticClass: "panel-head" }, [
+          _vm._v(
+            "Your page has 5 blocking script resources. This causes a delay in rendering your page."
+          )
+        ]),
+        _vm._v(" "),
+        _c("p", { staticClass: "description" }, [
+          _vm._v(
+            "None of the above-the-fold content on your page could be rendered without waiting for the following\n                                resources to load. Try to defer or asynchronously load blocking resources, or inline the\n                                critical portions of those resources directly in the HTML."
+          )
+        ]),
+        _vm._v(" "),
+        _c("ul", [
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _vm._v(
+                "https://tools.pingdom.com/_js/commonjs.bundle.js?v=c67c475724a05664377f1c330b54613395d60162"
+              )
+            ])
+          ]),
+          _vm._v(" "),
+          _c("li", [
+            _c("a", { attrs: { href: "#" } }, [
+              _vm._v(
+                "https://tools.pingdom.com/_js/commonjs.bundle.js?v=c67c475724a05664377f1c330b54613395d60162"
+              )
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("button", [_vm._v("Example")])
       ])
     ])
   },
@@ -51927,6 +51973,15 @@ if (inBrowser && window.Vue) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 66 */,
+/* 67 */,
+/* 68 */,
+/* 69 */
+/***/ (function(module, exports) {
+
+module.exports = "/images/loader.gif?1b583fd2a03d63edc2c3f44ff81ddf61";
 
 /***/ })
 /******/ ]);
